@@ -1,0 +1,47 @@
+# Yarn
+# no Zero-install
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Dependency directories
+node_modules
+
+# Optional npm cache directory
+.npm
+
+# mac files
+.DS_Store
+
+# vim swap files
+*.swp
+
+# webstorm
+.idea
+
+# vscode
+.vscode
+*code-workspace
+
+# compiled app
+dist
+
+# local setup files
+.env
+
+# test coverage
+c
