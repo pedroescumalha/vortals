@@ -2,18 +2,18 @@ import fs from "fs";
 import type { VortalsStrategy } from "./types";
 
 export type FileStrategy = VortalsStrategy & {
-    parser: (file: string) => Record<string, string>;
+    parser: (file: string) => Record<string, unknown>;
     path: string;
     environment: string | undefined;
 }
 
 export abstract class BaseFileStrategy implements FileStrategy {
-    parser: (file: string) => Record<string, string>;
+    parser: (file: string) => Record<string, unknown>;
     path: string;
     environment: string | undefined;
 
     constructor(
-        parser: (file: string) => Record<string, string>,
+        parser: (file: string) => Record<string, unknown>,
         path: string,
         environment: string | undefined) {
         this.parser = parser;
@@ -22,8 +22,8 @@ export abstract class BaseFileStrategy implements FileStrategy {
     }
 
     load(): Record<string, string> {
-        const baseFile: Record<string, string> = this.parser(fs.readFileSync(this.path, "utf8"));
-        let envFile: Record<string, string> = {};
+        const baseFile: Record<string, unknown> = this.parser(fs.readFileSync(this.path, "utf8"));
+        let envFile: Record<string, unknown> = {};
 
         if (this.environment) {
             envFile = this.parser(fs.readFileSync(this.path, "utf8"));

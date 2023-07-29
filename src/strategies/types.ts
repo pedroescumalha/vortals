@@ -1,3 +1,3 @@
 export interface VortalsStrategy {
-    load(): Record<string, string>;
+    load(): Record<string, unknown>;
 }
