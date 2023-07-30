@@ -12,7 +12,7 @@ export class EnvironmentVariablesStrategy implements VortalsStrategy {
         return key.indexOf(this.configPrefix) === 0;
     }
 
-    load(): Record<string, unknown> {
+    public load(): Record<string, unknown> {
         const vortalsEnvVarsKeys = Object.keys(process.env).filter((k) => this.isVortalsKey(k));
         const envVars: Record<string, unknown> = {};
 
