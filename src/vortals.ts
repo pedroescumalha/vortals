@@ -4,8 +4,8 @@ type VortalsConfigurationGuard<T> = (config: unknown) => config is T;
 
 export interface VortalsConfiguration {
     get<T>(key: string, guard: VortalsConfigurationGuard<T>): T | undefined;
-    addStrategy(strategy: VortalsStrategy): VortalsConfiguration;
-    addStrategies(...strategies: VortalsStrategy[]): VortalsConfiguration;
+    addStrategy(strategy: VortalsStrategy): void;
+    addStrategies(...strategies: VortalsStrategy[]): void;
 }
 
 const data: Array<Record<string, unknown>> = [];
@@ -25,17 +25,14 @@ function get<T>(key: string, guard?: VortalsConfigurationGuard<T>): T | undefine
     return undefined;
 }
 
-function addStrategy(strategy: VortalsStrategy): VortalsConfiguration {
+function addStrategy(strategy: VortalsStrategy): void {
     data.push(strategy.load());
-    return configuration;
 }
 
-function addStrategies(...strategies: VortalsStrategy[]): VortalsConfiguration {
+function addStrategies(...strategies: VortalsStrategy[]): void {
     for (const s of strategies) {
         data.push(s.load());
     }
-
-    return configuration;
 }
 
 export const configuration: VortalsConfiguration = {
