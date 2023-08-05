@@ -1,5 +1,5 @@
 import type { VortalsStrategy } from "./types";
-import { CONFIG_DELIMITER, CONFIG_PREFIX } from "./variables";
+import { CONFIG_DELIMITER, CONFIG_PREFIX } from "../utils";
 
 export class EnvironmentVariablesStrategy implements VortalsStrategy {
     private configPrefix = `${CONFIG_PREFIX}${CONFIG_DELIMITER}`;
@@ -13,11 +13,12 @@ export class EnvironmentVariablesStrategy implements VortalsStrategy {
     }
 
     public load(): Record<string, unknown> {
-        const vortalsEnvVarsKeys = Object.keys(process.env).filter((k) => this.isVortalsKey(k));
         const envVars: Record<string, unknown> = {};
 
-        for (const key of vortalsEnvVarsKeys) {
-            envVars[this.transformKey(key)] = process.env[key];
+        for (const key in process.env) {
+            if (this.isVortalsKey(key)) {
+                envVars[this.transformKey(key)] = process.env[key];
+            }
         }
 
         return envVars;
