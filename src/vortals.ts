@@ -8,6 +8,7 @@ export interface VortalsConfiguration {
     addStrategies(...strategies: VortalsStrategy[]): void;
 }
 
+// TODO: consider changing this to a Set
 const data: Array<Record<string, unknown>> = [];
 
 function get<T>(key: string, guard?: VortalsConfigurationGuard<T>): T | undefined {
