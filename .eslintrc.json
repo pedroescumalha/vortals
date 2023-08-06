@@ -1,6 +1,6 @@
 {
     "env": {
-        "browser": true,
+        "browser": false,
         "commonjs": true,
         "es2021": true
     },
@@ -34,17 +34,12 @@
             "error",
             "always"
         ],
-        "@typescript-eslint/explicit-function-return-type": [
-            "error",
-            {
-                "allowExpressions": true,
-                "allowHigherOrderFunctions": false
-            }
-        ],
         "no-use-before-define": "error",
         "@typescript-eslint/explicit-function-return-type": ["error", {
             "allowExpressions": true,
             "allowHigherOrderFunctions": false
-        }]
+        }],
+        "no-whitespace-before-property": "error",
+        "key-spacing": ["error", { "mode": "strict" }]
     }
 }
