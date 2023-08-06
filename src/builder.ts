@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import { EnvironmentVariablesStrategy } from "./strategies/environmentVariablesStrategy";
 import { JsonFileStrategy } from "./strategies/fileStrategy";
-import { type VortalsStrategy } from "./strategies/types";
+import type { VortalsStrategy } from "./vortals";
 import { configuration, type VortalsConfiguration } from "./vortals";
 
 interface VortalsConfigurationBuilder {
@@ -18,7 +18,6 @@ function addEnvironmentVariables(): VortalsConfigurationBuilder {
     return vortalsConfigurationBuilder;
 }
 
-// TODO: missing arguments for configuring the strategy
 function addJsonFiles(configPath = "configs/configuration.json", environment = process.env.APP_ENV): VortalsConfigurationBuilder {
     strategies.push(new JsonFileStrategy(configPath, environment));
     return vortalsConfigurationBuilder;

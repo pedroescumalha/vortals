@@ -1,6 +1,9 @@
-import { VortalsStrategy } from "./strategies/types";
-
 type VortalsConfigurationGuard<T> = (config: unknown) => config is T;
+
+export interface VortalsStrategy {
+    load(): Record<string, unknown>;
+}
+
 
 export interface VortalsConfiguration {
     get<T>(key: string, guard: VortalsConfigurationGuard<T>): T | undefined;

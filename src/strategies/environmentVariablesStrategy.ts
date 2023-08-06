@@ -1,4 +1,4 @@
-import type { VortalsStrategy } from "./types";
+import type { VortalsStrategy } from "../vortals";
 import { CONFIG_DELIMITER, CONFIG_PREFIX } from "../utils";
 
 export class EnvironmentVariablesStrategy implements VortalsStrategy {

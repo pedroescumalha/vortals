@@ -1,5 +1,5 @@
 import fs from "fs";
-import type { VortalsStrategy } from "./types";
+import type { VortalsStrategy } from "../vortals";
 import { CONFIG_DELIMITER } from "../utils";
 
 export type FileStrategy = VortalsStrategy & {
