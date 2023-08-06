@@ -42,6 +42,9 @@
             }
         ],
         "no-use-before-define": "error",
-        "@typescript-eslint/explicit-function-return-type": "off"
+        "@typescript-eslint/explicit-function-return-type": ["error", {
+            "allowExpressions": true,
+            "allowHigherOrderFunctions": false
+        }]
     }
 }
