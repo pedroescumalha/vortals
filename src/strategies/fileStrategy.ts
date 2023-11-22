@@ -40,7 +40,8 @@ export abstract class BaseFileStrategy implements FileStrategy {
     constructor(
         parser: (file: string) => Record<string, unknown>,
         path: string,
-        environment: string | undefined) {
+        environment: string | undefined
+    ) {
         this.parser = parser;
         this.path = path;
         this.environment = environment;

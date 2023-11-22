@@ -10,13 +10,12 @@
     ],
     "overrides": [
     ],
+    "root": true,
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
+    "plugins": ["@typescript-eslint"],
     "rules": {
         "indent": [
             "error",
@@ -40,6 +39,12 @@
             "allowHigherOrderFunctions": false
         }],
         "no-whitespace-before-property": "error",
-        "key-spacing": ["error", { "mode": "strict" }]
+        "key-spacing": ["error", { "mode": "strict" }],
+        "@typescript-eslint/array-type": "error",
+        "@typescript-eslint/consistent-type-imports": "error",
+        "function-paren-newline": ["error", "consistent"],
+        "require-await": "error",
+        "brace-style": "off",
+        "@typescript-eslint/brace-style": "error"
     }
 }

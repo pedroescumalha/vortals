@@ -14,7 +14,7 @@ export interface VortalsConfiguration {
 }
 
 // TODO: consider changing this to a Set
-const data: Array<Record<string, unknown>> = [];
+const data: Record<string, unknown>[] = [];
 
 function hasChildren(configKeys: string[], parentKey: string): boolean {
     return configKeys.some((k) => k.startsWith(parentKey + CONFIG_DELIMITER));
