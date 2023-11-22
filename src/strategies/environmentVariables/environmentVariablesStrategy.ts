@@ -9,7 +9,7 @@ export class EnvironmentVariablesStrategy implements VortalsStrategy {
     }
 
     private isVortalsKey(key: string): boolean {
-        return key.indexOf(this.configPrefix) === 0;
+        return key.startsWith(this.configPrefix);
     }
 
     public load(): Record<string, unknown> {
