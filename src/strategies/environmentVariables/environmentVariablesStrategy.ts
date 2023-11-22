@@ -1,5 +1,5 @@
-import type { VortalsStrategy } from "../vortals";
-import { CONFIG_DELIMITER, CONFIG_PREFIX } from "../utils";
+import type { VortalsStrategy } from "../../vortals";
+import { CONFIG_DELIMITER, CONFIG_PREFIX } from "../../utils";
 
 export class EnvironmentVariablesStrategy implements VortalsStrategy {
     private configPrefix = `${CONFIG_PREFIX}${CONFIG_DELIMITER}`;

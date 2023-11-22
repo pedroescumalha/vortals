@@ -1,16 +1,16 @@
 import { CONFIG_DELIMITER } from "./utils";
 
+// TODO: JSDOC
+
 export type VortalsConfigurationGuard<T> = (config: unknown) => config is T;
 
 export interface VortalsStrategy {
     load(): Record<string, unknown>;
 }
 
-
 export interface VortalsConfiguration {
-    get<T>(key: string, guard: VortalsConfigurationGuard<T>): T | undefined;
-    addStrategy(strategy: VortalsStrategy): void;
-    addStrategies(...strategies: VortalsStrategy[]): void;
+    get<T>(key: string, guard?: VortalsConfigurationGuard<T>): T | undefined;
+    addStrategy(...strategies: VortalsStrategy[]): void;
 }
 
 // TODO: consider changing this to a Set
@@ -74,11 +74,7 @@ function get<T>(key: string, guard?: VortalsConfigurationGuard<T>): T | undefine
     return obj as T;
 }
 
-function addStrategy(strategy: VortalsStrategy): void {
-    data.push(strategy.load());
-}
-
-function addStrategies(...strategies: VortalsStrategy[]): void {
+function addStrategy(...strategies: VortalsStrategy[]): void {
     for (const s of strategies) {
         data.push(s.load());
     }
@@ -87,5 +83,4 @@ function addStrategies(...strategies: VortalsStrategy[]): void {
 export const configuration: VortalsConfiguration = {
     get,
     addStrategy,
-    addStrategies,
 };
