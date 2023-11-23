@@ -54,12 +54,40 @@ describe(JsonFileStrategy.name, () => {
         assert.deepEqual(data, expectedValue);
     });
 
-    it("imports correctly if file is an array", () => {
+    it("throws if file is an array", () => {
+        const file = [ { b: true } ];
+        mock.method(fs, "readFileSync", () => JSON.stringify(file));
+
+        const fileStrategy = new JsonFileStrategy();
+
+        assert.throws(() => {
+            fileStrategy.load();
+        });
     });
 
     it("imports objects correctly", () => {
-    });
+        const file = { 
+            data1: true,
+            data2: {
+                data3: true,
+                data4: {
+                    data5: true,
+                },
+            },
+        };
 
-    it("overrides files based on environment correctly", () => {
+        const expectedValue = {
+            "data1": file.data1,
+            "data2__data3": file.data2.data3,
+            "data2__data4__data5": true,
+        };
+
+        mock.method(fs, "readFileSync", () => JSON.stringify(file));
+
+        const strategy = new JsonFileStrategy();
+
+        const data = strategy.load();
+
+        assert.deepEqual(data, expectedValue);
     });
 });
