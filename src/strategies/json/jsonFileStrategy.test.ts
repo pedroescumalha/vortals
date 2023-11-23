@@ -4,7 +4,6 @@ import { JsonFileStrategy } from "./jsonFileStrategy";
 import assert from "node:assert";
 
 describe(JsonFileStrategy.name, () => {
-
     beforeEach(() => {
         mock.restoreAll();
     });
