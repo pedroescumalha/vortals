@@ -1,6 +1,7 @@
 import fs from "fs";
 import type { VortalsStrategy } from "../vortals";
 import { CONFIG_DELIMITER } from "../utils";
+import { objectMapper } from "../objectMapper";
 
 export type FileStrategy = VortalsStrategy & {
     parser: (file: string) => Record<string, unknown>;
@@ -26,46 +27,8 @@ export abstract class BaseFileStrategy implements FileStrategy {
         }
 
         return {
-            ...this.mapToKeyValueObject(baseFile),
-            ...this.mapToKeyValueObject(envFile),
+            ...objectMapper.flat(baseFile, CONFIG_DELIMITER),
+            ...objectMapper.flat(envFile, CONFIG_DELIMITER),
         };
-    }
-
-    private mapArray(config: unknown[], keyPrefix: string): Record<string, unknown> {
-        return config.reduce((acc: Record<string, unknown>, curr: unknown, i) => {
-            return { ...acc, [keyPrefix + CONFIG_DELIMITER + i.toString()]: curr };
-        }, {});
-    }
-
-    private mapToKeyValueObject(config: Record<string, unknown>): Record<string, unknown> {
-        let res = {} as Record<string, unknown>;
-
-        const mapToKeyValueObjectDeep = (data: Record<string, unknown> | unknown[], keyPrefix = ""): void => {
-            for (const k in data) {
-                const value = config[k as keyof typeof data];
-
-                if (Array.isArray(value)) {
-                    res = {
-                        ...res,
-                        ...this.mapArray(
-                            value,
-                            keyPrefix ? keyPrefix + CONFIG_DELIMITER + k : k 
-                        ),
-                    };
-
-                    continue;
-                }
-
-                if (typeof value === "object" && value !== null) {
-                    mapToKeyValueObjectDeep(value as Record<string, unknown>, keyPrefix + CONFIG_DELIMITER + k);
-                }
-
-                res[keyPrefix ? keyPrefix + CONFIG_DELIMITER + k : k] = value;
-            }
-        };
-
-        mapToKeyValueObjectDeep(config);
-
-        return res;
     }
 }
